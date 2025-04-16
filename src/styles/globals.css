@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-rgb: 249, 250, 251;
+    --primary-color: #10b981; /* Emerald 500 */
+    --primary-hover-color: #059669; /* Emerald 600 */
+    --error-color: #ef4444;
+  }
+  
+  body {
+    color: rgb(var(--foreground-rgb));
+    background-color: rgb(var(--background-rgb));
+  }
+  
+  /* Modo oscuro */
+  .dark body {
+    color: rgb(229, 231, 235);
+    background-color: rgb(17, 24, 39);
+  }
+  
+  .form-input-error {
+    @apply border-red-500 focus:ring-red-500;
+  }
+  
+  /* Transiciones suaves */
+  .transition-all {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  /* Estilos de formularios */
+  .form-input {
+    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-200;
+  }
+  
+  .form-error {
+    @apply mt-1 text-sm text-red-600 dark:text-red-400;
+  }
+  
+  /* Estilos de botones */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500;
+  }
+  
+  .btn-secondary {
+    @apply bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 focus:ring-emerald-500;
+  }
+  
+  /* Animaciones */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
