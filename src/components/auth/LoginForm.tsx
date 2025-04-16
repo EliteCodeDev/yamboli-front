@@ -44,7 +44,7 @@ export default function LoginForm() {
         password,
       });
 
-      console.log("Resultado de inicio de sesión:", result);
+      console.log("Resultado de inicio de sesión:", email, password, result);
 
       if (result?.ok) {
         toast.success("Sesión iniciada correctamente.");
@@ -58,13 +58,16 @@ export default function LoginForm() {
         }
       } else {
         // Si el usuario existe pero falla la autenticación, entonces es problema de contraseña
-        if (userCheck?.exists) {
+        if (userCheck?.exists && userCheck.blocked) {
+          setErrorMsg("Tu cuenta está bloqueada. Contacta con soporte.");
+        } else if (userCheck?.exists && !userCheck.confirmed) {
+          setErrorMsg("Debes confirmar tu correo antes de ingresar.");
+        } else if (userCheck?.exists) {
           setErrorMsg("Contraseña incorrecta");
-          // Mostramos el error en rojo en la UI
           document.getElementById("password-container")?.classList.add("error-state");
         } else {
           setErrorMsg("Credenciales incorrectas");
-        }
+        }        
       }
     } catch (error: any) {
       console.error("Error durante el proceso de login:", error);
