@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
-import { Home, Users, BarChart2, Settings, FileText } from "lucide-react";
+import { Home, Users, BarChart2, Settings, FileText, Briefcase } from "lucide-react";
 import { cn } from "@/utils/helpers";
 
 const navigation = [
@@ -11,6 +11,7 @@ const navigation = [
   { name: "Usuarios", href: "/users", icon: Users },
   { name: "Reportes", href: "/reports", icon: BarChart2 },
   { name: "Documentos", href: "/documents", icon: FileText },
+  { name: "Gestión", href: "/gestion", icon: Briefcase },
   { name: "Configuración", href: "/settings", icon: Settings },
 ];
 
