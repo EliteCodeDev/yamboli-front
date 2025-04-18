@@ -19,10 +19,10 @@ export default function LoginForm() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     // Limpiar error anterior
     setErrorMsg(null);
-    
+
     // Bloquear el botón de enviar
     setIsSubmitting(true);
 
@@ -32,11 +32,11 @@ export default function LoginForm() {
 
     try {
       console.log("Iniciando proceso de login para:", email);
-      
+
       // Primero verificamos si el usuario existe
       const userCheck = await checkUserConfirmation(email);
       console.log("Datos de usuario recibidos:", userCheck);
-      
+
       // Intentamos iniciar sesión con las credenciales
       const result = await signIn("credentials", {
         redirect: false,
@@ -48,13 +48,13 @@ export default function LoginForm() {
 
       if (result?.ok) {
         toast.success("Sesión iniciada correctamente.");
-        
+
         // Redirección después del login
         const callbackUrl = new URLSearchParams(window.location.search).get("callbackUrl");
         if (callbackUrl) {
           router.replace(callbackUrl);
         } else {
-          router.replace("/");
+          router.replace("/dashboard");
         }
       } else {
         // Si el usuario existe pero falla la autenticación, entonces es problema de contraseña
@@ -67,11 +67,11 @@ export default function LoginForm() {
           document.getElementById("password-container")?.classList.add("error-state");
         } else {
           setErrorMsg("Credenciales incorrectas");
-        }        
+        }
       }
     } catch (error: any) {
       console.error("Error durante el proceso de login:", error);
-      
+
       const errorMessage = error.message || "Error al conectar con el servidor";
       setErrorMsg(errorMessage);
       toast.error(errorMessage);
@@ -90,7 +90,7 @@ export default function LoginForm() {
           <span>{errorMsg}</span>
         </div>
       )}
-      
+
       <form className="space-y-6" onSubmit={onSubmit}>
         <div>
           <label
@@ -139,11 +139,10 @@ export default function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
               minLength={6}
               required
-              className={`block w-full rounded-md border-0 py-1.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm ring-1 ring-inset ${
-                errorMsg === "Contraseña incorrecta" 
-                  ? "ring-red-500 focus:ring-red-500" 
+              className={`block w-full rounded-md border-0 py-1.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm ring-1 ring-inset ${errorMsg === "Contraseña incorrecta"
+                  ? "ring-red-500 focus:ring-red-500"
                   : "ring-gray-300 dark:ring-gray-700 focus:ring-emerald-600"
-              } placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6`}
+                } placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6`}
             />
             <button
               type="button"
@@ -173,9 +172,8 @@ export default function LoginForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`text-white w-full justify-center inline-flex items-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 ${
-              isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-600"
-            }`}
+            className={`text-white w-full justify-center inline-flex items-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 ${isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-600"
+              }`}
           >
             {isSubmitting ? (
               <>
